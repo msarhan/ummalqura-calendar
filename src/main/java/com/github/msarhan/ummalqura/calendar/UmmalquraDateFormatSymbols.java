@@ -1,4 +1,4 @@
-package org.ummalqura.calendar;
+package com.github.msarhan.ummalqura.calendar;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -64,7 +64,7 @@ class UmmalquraDateFormatSymbols {
 		locale = desiredLocale;
 
 		// Initialize the fields from the ResourceBundle for locale.
-		ResourceBundle resource = ResourceBundle.getBundle("org.ummalqura.calendar.text.UmmalquraFormatData", locale);
+		ResourceBundle resource = ResourceBundle.getBundle("com.github.msarhan.ummalqura.calendar.text.UmmalquraFormatData", locale);
 
 		months = resource.getStringArray("MonthNames");
 		shortMonths = resource.getStringArray("MonthAbbreviations");

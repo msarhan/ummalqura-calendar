@@ -6,20 +6,36 @@
 
 	<groupId>org.ummalqura</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
+	<packaging>jar</packaging>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Implements the Umm Al-Qura calendar system in Java language.</description>
+	<url>https://github.com/msarhan/ummalqura-calendar</url>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Mouaffak A. Sarhan</name>
+			<email>mouffaksarhan@gmail.com</email>
+			<organization>Github</organization>
+			<organizationUrl>https://github.com/msarhan/ummalqura-calendar</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:https://github.com/msarhan/ummalqura-calendar.git</connection>
+		<developerConnection>scm:git:git@github.com:msarhan/ummalqura-calendar.git</developerConnection>
+		<url>https://github.com/msarhan/ummalqura-calendar</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
-
-	<scm>
-		<connection>scm:git:https://github.com/msarhan/ummalqura-calendar.git</connection>
-		<developerConnection>scm:git:git@github.com:msarhan/ummalqura-calendar.git</developerConnection>
-		<url>https://github.com/msarhan/ummalqura-calendar</url>
-		<tag>HEAD</tag>
-	</scm>
 
 	<dependencies>
 		<dependency>
@@ -73,4 +89,5 @@
 			<url>https://api.bintray.com/maven/masarhan/maven/ummalqura-calendar</url>
 		</repository>
 	</distributionManagement>
+
 </project>

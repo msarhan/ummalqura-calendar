@@ -1,4 +1,4 @@
-package org.ummalqura.calendar.text;
+package com.github.msarhan.ummalqura.calendar.text;
 
 import java.util.ListResourceBundle;
 

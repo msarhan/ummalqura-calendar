@@ -1,5 +1,6 @@
-package org.ummalqura.calendar;
+package com.github.msarhan.ummalqura.calendar;
 
+import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
