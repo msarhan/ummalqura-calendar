@@ -1,4 +1,4 @@
-package org.ummalqura.calendar;
+package com.github.msarhan.ummalqura.calendar;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class UmmalquraGregorianConverterTests {
 
 	@Test
-	public void gregorianToHijri1(){
+	public void gregorianToHijri1() {
 		Calendar cal = new GregorianCalendar(2015, Calendar.MARCH, 14);
 		int[] hDateInfo = UmmalquraGregorianConverter.toHijri(cal.getTime());
 
@@ -21,7 +21,7 @@ public class UmmalquraGregorianConverterTests {
 	}
 
 	@Test
-	public void gregorianToHijri2(){
+	public void gregorianToHijri2() {
 		Calendar cal = new GregorianCalendar(1999, Calendar.APRIL, 1);
 		int[] hDateInfo = UmmalquraGregorianConverter.toHijri(cal.getTime());
 
@@ -29,7 +29,7 @@ public class UmmalquraGregorianConverterTests {
 	}
 
 	@Test
-	public void gregorianToHijri3(){
+	public void gregorianToHijri3() {
 		Calendar cal = new GregorianCalendar(1989, Calendar.FEBRUARY, 25);
 		int[] hDateInfo = UmmalquraGregorianConverter.toHijri(cal.getTime());
 
@@ -37,14 +37,14 @@ public class UmmalquraGregorianConverterTests {
 	}
 
 	@Test
-	public void hijriToGregorian1(){
+	public void hijriToGregorian1() {
 		int[] hDateInfo = UmmalquraGregorianConverter.toGregorian(1436, 4, 23);
 
 		assertTrue("1436-05-23 H should be 2015-03-14 G", hDateInfo[0] == 2015 && hDateInfo[1] == 2 && hDateInfo[2] == 14);
 	}
 
 	@Test
-	public void hijriToGregorian2(){
+	public void hijriToGregorian2() {
 		int[] hDateInfo = UmmalquraGregorianConverter.toGregorian(1419, 11, 15);
 
 		assertTrue("1419-12-15 H should be 1999-04-01 G", hDateInfo[0] == 1999 && hDateInfo[1] == 3 && hDateInfo[2] == 1);
