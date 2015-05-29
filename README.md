@@ -11,18 +11,6 @@ Implements the Umm Al-Qura calendar system in Java language.
 * Install [Maven 3](http://maven.apache.org/download.html)
 * Check out this repo and: `mvn clean install`
 
-##Installation
-
-Add the following repository to your pom.xml file:
-```xml
-<repository>
-	<id>bintray-masarhan-maven</id>
-	<name>bintray</name>
-	<url>http://dl.bintray.com/masarhan/maven</url>
-</repository>
-```
-This step will not be necessary once deployed to JCenter!
-
 ##Usage
 
 ```java

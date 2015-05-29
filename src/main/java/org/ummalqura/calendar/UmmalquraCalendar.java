@@ -285,12 +285,17 @@ public class UmmalquraCalendar extends GregorianCalendar {
 	}
 
 	private String[] getFieldStrings(int field, int style, UmmalquraDateFormatSymbols symbols) {
-		String[] strings = null;
 		if (field == MONTH) {
-			strings = (style == LONG) ? symbols.getMonths() : symbols.getShortMonths();
+			if (SHORT == style) {
+				return symbols.getShortMonths();
+			}
+
+			if (LONG == style) {
+				return symbols.getMonths();
+			}
 		}
 
-		return strings;
+		return null;
 	}
 
 	public boolean equals(Object obj) {
