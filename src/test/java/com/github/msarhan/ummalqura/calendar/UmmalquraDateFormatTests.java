@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static com.github.msarhan.ummalqura.calendar.UmmalquraCalendar.JUMADA_AWWAL;
+import static com.github.msarhan.ummalqura.calendar.UmmalquraCalendar.THUL_QIDAH;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -112,13 +114,13 @@ public class UmmalquraDateFormatTests {
 	public void testStandAloneCountParse() throws Exception {
 		TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
 
-		assertEquals(5, parseDate("5", "M", en).get(Calendar.MONTH) + 1);
-		assertEquals(5, parseDate("05", "MM", en).get(Calendar.MONTH) + 1);
-		assertEquals(5, parseDate("Jum-I", "MMM", en).get(Calendar.MONTH) + 1);
-		assertEquals(5, parseDate("Jumada al-Ula", "MMMM", en).get(Calendar.MONTH) + 1);
-		assertEquals(11, parseDate("Thul-Qi'dah", "MMMM", en).get(Calendar.MONTH) + 1);
-		assertEquals(5, parseDate("جمادى 1", "MMM", ar).get(Calendar.MONTH) + 1);
-		assertEquals(5, parseDate("جمادى الأولى", "MMMM", ar).get(Calendar.MONTH) + 1);
+		assertEquals(JUMADA_AWWAL, parseDate("5", "M", en).get(Calendar.MONTH));
+		assertEquals(JUMADA_AWWAL, parseDate("05", "MM", en).get(Calendar.MONTH));
+		assertEquals(JUMADA_AWWAL, parseDate("Jum-I", "MMM", en).get(Calendar.MONTH));
+		assertEquals(JUMADA_AWWAL, parseDate("Jumada al-Ula", "MMMM", en).get(Calendar.MONTH));
+		assertEquals(THUL_QIDAH, parseDate("Thul-Qi'dah", "MMMM", en).get(Calendar.MONTH));
+		assertEquals(JUMADA_AWWAL, parseDate("جمادى 1", "MMM", ar).get(Calendar.MONTH));
+		assertEquals(JUMADA_AWWAL, parseDate("جمادى الأولى", "MMMM", ar).get(Calendar.MONTH));
 
 		assertEquals(1436, parseDate("1436", "y", en).get(Calendar.YEAR));
 		assertEquals(1435, parseDate("35", "yy", en).get(Calendar.YEAR));
@@ -126,6 +128,7 @@ public class UmmalquraDateFormatTests {
 
 		assertEquals(9, parseDate("9", "d", en).get(Calendar.DAY_OF_MONTH));
 		assertEquals(9, parseDate("09", "dd", en).get(Calendar.DAY_OF_MONTH));
+		assertEquals(9, parseDate("009", "ddd", en).get(Calendar.DAY_OF_MONTH));
 
 		assertEquals(Calendar.SATURDAY, parseDate("Sat", "E", en).get(Calendar.DAY_OF_WEEK));
 		assertEquals(Calendar.SATURDAY, parseDate("Saturday", "EEEE", en).get(Calendar.DAY_OF_WEEK));
