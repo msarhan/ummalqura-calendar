@@ -314,7 +314,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
 			hFields = new int[super.fields.length];
 		}
 
-		int[] hDateInfo = UmmalquraGregorianConverter.toHijri(getTime());
+		int[] hDateInfo = UmmalquraGregorianConverter.toHijri(time);
 		hFields[Calendar.YEAR] = hDateInfo[0];
 		hFields[Calendar.MONTH] = hDateInfo[1];
 		hFields[Calendar.DAY_OF_MONTH] = hDateInfo[2];

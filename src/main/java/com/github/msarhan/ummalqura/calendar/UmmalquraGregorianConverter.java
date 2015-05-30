@@ -13,6 +13,10 @@ import java.util.Date;
  */
 class UmmalquraGregorianConverter {
 
+	public static int[] toHijri(long time) {
+		return toHijri(new Date(time));
+	}
+
 	public static int[] toHijri(Date date) {
 		Calendar gCal = Calendar.getInstance();
 		gCal.setTime(date);
