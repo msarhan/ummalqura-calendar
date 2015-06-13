@@ -6,6 +6,15 @@ Implements the Umm Al-Qura calendar system in Java language.
 1. [http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm](http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm).
 2. [http://www.ummulqura.org.sa/](http://www.ummulqura.org.sa).
 
+##Installation
+```xml
+<dependency>
+	<groupId>com.github.msarhan</groupId>
+	<artifactId>ummalqura-calendar</artifactId>
+	<version>1.1.5</version>
+</dependency>
+```
+
 ##Compilation
 
 * Install [Maven 3](http://maven.apache.org/download.html)
