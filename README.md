@@ -7,6 +7,7 @@ Implements the Umm Al-Qura calendar system in Java language.
 2. [http://www.ummulqura.org.sa/](http://www.ummulqura.org.sa).
 
 ##Installation
+**Maven**
 ```xml
 <dependency>
 	<groupId>com.github.msarhan</groupId>
@@ -14,11 +15,15 @@ Implements the Umm Al-Qura calendar system in Java language.
 	<version>1.1.5</version>
 </dependency>
 ```
-
-##Compilation
-
-* Install [Maven 3](http://maven.apache.org/download.html)
-* Check out this repo and: `mvn clean install`
+**Gradle**
+```gradle
+repositories {
+	mavenCentral()
+}
+dependencies {
+	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.5'
+}
+```
 
 ##Usage
 

@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+group = 'com.github.msarhan'
+version = '1.1.5'
+
+description = """com.github.msarhan:ummalqura-calendar"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version:'4.11'
+}
