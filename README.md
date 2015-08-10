@@ -12,7 +12,7 @@ Implements the Umm Al-Qura calendar system in Java language.
 <dependency>
 	<groupId>com.github.msarhan</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.5</version>
+	<version>1.1.6</version>
 </dependency>
 ```
 **Gradle**
@@ -21,7 +21,7 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.5'
+	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.6'
 }
 ```
 
