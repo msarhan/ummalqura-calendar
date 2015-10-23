@@ -53,17 +53,16 @@ class UmmalquraGregorianConverter {
 		return a - ~~(a / b) * b;
 	}
 
-	private static int getDaysInMonth(int year, int month) {
+	static int getDaysInMonth(int year, int month) {
 		int i = getNewMoonMJDNIndex(year, month + 1);
 		return ummalquraData[i] - ummalquraData[i - 1];
 	}
 
 	private static int h2d(int hy, int hm, int hd) {
 		int i = getNewMoonMJDNIndex(hy, hm),
-						mjdn = hd + ummalquraData[i - 1] - 1,
-						jdn = mjdn + 2400000;
+						mjdn = hd + ummalquraData[i - 1] - 1;
 
-		return jdn;
+		return mjdn + 2400000;
 	}
 
 	private static int[] d2h(int jdn) {
@@ -98,9 +97,8 @@ class UmmalquraGregorianConverter {
 
 	private static int getNewMoonMJDNIndex(int hy, int hm) {
 		int cYears = hy - 1,
-						totalMonths = (cYears * 12) + 1 + (hm - 1),
-						i = totalMonths - 16260;
-		return i;
+						totalMonths = (cYears * 12) + 1 + (hm - 1);
+		return totalMonths - 16260;
 	}
 
 	private static int getNewMoonMJDNIndexByJDN(int mjdn) {

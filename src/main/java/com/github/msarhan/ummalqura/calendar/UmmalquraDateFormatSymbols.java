@@ -41,18 +41,18 @@ class UmmalquraDateFormatSymbols {
 	Locale locale = null;
 
 	/**
-	 * Month strings. For example: "January", "February", etc.  An array
-	 * of 13 strings (some calendars have 13 months), indexed by
-	 * <code>Calendar.JANUARY</code>, <code>Calendar.FEBRUARY</code>, etc.
+	 * Month strings. For example: "Muharram", "Safar", etc.  An array
+	 * of 12 strings, indexed by
+	 * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
 	 *
 	 * @serial
 	 */
 	String[] months = null;
 
 	/**
-	 * Short month strings. For example: "Jan", "Feb", etc.  An array of
-	 * 13 strings (some calendars have 13 months), indexed by
-	 * <code>Calendar.JANUARY</code>, <code>Calendar.FEBRUARY</code>, etc.
+	 * Short month strings. For example: "Muh", "Saf", etc.  An array of
+	 * 12 strings, indexed by
+	 * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
 	 *
 	 * @serial
 	 */
@@ -67,7 +67,7 @@ class UmmalquraDateFormatSymbols {
 	}
 
 	/**
-	 * Gets month strings. For example: "January", "February", etc.
+	 * Gets month strings. For example: "Muharram", "Safar", etc.
 	 *
 	 * @return the month strings.
 	 */
@@ -76,7 +76,7 @@ class UmmalquraDateFormatSymbols {
 	}
 
 	/**
-	 * Gets short month strings. For example: "Jan", "Feb", etc.
+	 * Gets short month strings. For example: "Muh", "Saf", etc.
 	 *
 	 * @return the short month strings.
 	 */

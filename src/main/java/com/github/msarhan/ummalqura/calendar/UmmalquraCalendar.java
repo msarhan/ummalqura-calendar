@@ -101,7 +101,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
 	 * Value of the {@link #MONTH} field indicating the
 	 * twelfth month of the year in the Ummalqura calendar.
 	 */
-	public final static int THUL_Hijjah = 11;
+	public final static int THUL_HIJJAH = 11;
 
 	/**
 	 * The calendar field values for the currently set time for this calendar.
@@ -233,6 +233,91 @@ public class UmmalquraCalendar extends GregorianCalendar {
 
 	}
 
+	/**
+	 * Returns the length of the month represented by this calendar.
+	 * <p>
+	 * This returns the length of the month in days.
+	 *
+	 * @return the length of the month in days
+	 */
+	public int lengthOfMonth() {
+		return lengthOfMonth(get(YEAR), get(MONTH));
+	}
+
+	/**
+	 * Returns the length of a Hijri month in a Hijri year.
+	 * <p>
+	 * This returns the length of the month in days.
+	 *
+	 * @param year  Hijri year
+	 * @param month Hijri month
+	 * @return the length of the month in days
+	 */
+	public static int lengthOfMonth(int year, int month) {
+		return UmmalquraGregorianConverter.getDaysInMonth(year, month);
+	}
+
+	/**
+	 * Returns the length of the year represented by this calendar.
+	 * <p>
+	 * This returns the length of the year in days, either 354 or 355.
+	 *
+	 * @return 355 if the year is leap, 354 otherwise
+	 */
+	public int lengthOfYear() {
+		return lengthOfYear(get(YEAR));
+	}
+
+	/**
+	 * Returns the length of the given year.
+	 * <p>
+	 * This returns the length of the year in days, either 354 or 355.
+	 *
+	 * @param year the year to calculate day count for.
+	 * @return 355 if the year is leap, 354 otherwise
+	 */
+	public static int lengthOfYear(int year) {
+		int total = 0;
+		for (int m = MUHARRAM; m <= THUL_HIJJAH; m++) {
+			total += lengthOfMonth(year, m);
+		}
+
+		return total;
+	}
+
+	/**
+	 * Returns the string representation of the calendar
+	 * <code>field</code> value in the given <code>style</code> and
+	 * <code>locale</code>.  If no string representation is
+	 * applicable, <code>null</code> is returned. This method calls
+	 * {@link Calendar#get(int) get(field)} to get the calendar
+	 * <code>field</code> value if the string representation is
+	 * applicable to the given calendar <code>field</code>.
+	 * <p>For example, if this <code>Calendar</code>'s date is 1437-01-01, then
+	 * the string representation of the {@link #MONTH} field would be
+	 * "Muharram" in the long style in an English locale or "Muh" in
+	 * the short style. However, no string representation would be
+	 * available for the {@link #DAY_OF_MONTH} field, and this method
+	 * would return <code>null</code>.
+	 * <p>The default implementation supports the calendar fields for
+	 * which a {@link UmmalquraDateFormatSymbols} has names in the given
+	 * <code>locale</code>.
+	 *
+	 * @param field  the calendar field for which the string representation
+	 *               is returned
+	 * @param style  the style applied to the string representation; one of
+	 *               {@link #SHORT} or {@link #LONG}.
+	 * @param locale the locale for the string representation
+	 * @return the string representation of the given
+	 * <code>field</code> in the given <code>style</code>, or
+	 * <code>null</code> if no string representation is
+	 * applicable.
+	 * @throws IllegalArgumentException if <code>field</code> or <code>style</code> is invalid,
+	 *                                  or if this <code>Calendar</code> is non-lenient and any
+	 *                                  of the calendar fields have invalid values
+	 * @throws NullPointerException     if <code>locale</code> is null
+	 * @since 1.6
+	 */
 	@Override
 	public String getDisplayName(int field, int style, Locale locale) {
 
@@ -252,6 +337,40 @@ public class UmmalquraCalendar extends GregorianCalendar {
 		return super.getDisplayName(field, style, locale);
 	}
 
+	/**
+	 * Returns a <code>Map</code> containing all names of the calendar
+	 * <code>field</code> in the given <code>style</code> and
+	 * <code>locale</code> and their corresponding field values. For
+	 * example, The returned map would contain "Muh" to
+	 * {@link #MUHARRAM}, "Saf" to {@link #SAFAR}, and so on, in the
+	 * {@linkplain #SHORT short} style in an English locale.
+	 * <p>The values of other calendar fields may be taken into
+	 * account to determine a set of display names. For example, if
+	 * this <code>Calendar</code> is a lunisolar calendar system and
+	 * the year value given by the {@link #YEAR} field has a leap
+	 * month, this method would return month names containing the leap
+	 * month name, and month names are mapped to their values specific
+	 * for the year.
+	 * <p>This implementation supports display names contained in
+	 * a {@link UmmalquraDateFormatSymbols}. For example, if <code>field</code>
+	 * is {@link #MONTH} and <code>style</code> is {@link
+	 * #ALL_STYLES}, this method returns a <code>Map</code> containing
+	 * all strings returned by {@link UmmalquraDateFormatSymbols#getShortMonths()}
+	 * and {@link UmmalquraDateFormatSymbols#getMonths()}.
+	 *
+	 * @param field  the calendar field for which the display names are returned
+	 * @param style  the style applied to the display names; one of {@link
+	 *               #SHORT}, {@link #LONG}, or {@link #ALL_STYLES}.
+	 * @param locale the locale for the display names
+	 * @return a <code>Map</code> containing all display names in
+	 * <code>style</code> and <code>locale</code> and their
+	 * field values, or <code>null</code> if no display names
+	 * are defined for <code>field</code>
+	 * @throws IllegalArgumentException if <code>field</code> or <code>style</code> is invalid,
+	 *                                  or if this <code>Calendar</code> is non-lenient and any
+	 *                                  of the calendar fields have invalid values
+	 * @throws NullPointerException     if <code>locale</code> is null
+	 */
 	public Map<String, Integer> getDisplayNames(int field, int style, Locale locale) {
 
 		if (field == MONTH) {

@@ -24,14 +24,10 @@
 
 package com.github.msarhan.ummalqura.calendar;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,16 +37,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class UmmalquraCalendarTests {
 
-	private UmmalquraCalendar cal = new UmmalquraCalendar();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("y-M-d");
-
-	@Before
-	public void setup() {
-		cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
-	}
 
 	@Test
 	public void testDisplayName() {
+		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
 
 		String displayName = cal.getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, new Locale("en"));
 		assertEquals("Month long display name for Jumada al-Ula 23, 1436 should be 'Jumada al-Ula'", "Jumada al-Ula", displayName);
@@ -68,6 +59,7 @@ public class UmmalquraCalendarTests {
 
 	@Test
 	public void testDisplayNames() {
+		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
 
 		Map<String, Integer> displayNames = cal.getDisplayNames(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, new Locale("en"));
 		assertEquals("Month long display names count should be 12", 12, displayNames.size());
@@ -93,6 +85,8 @@ public class UmmalquraCalendarTests {
 
 	@Test
 	public void testSetYearField() {
+		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
+
 		cal.set(UmmalquraCalendar.YEAR, 1430);
 		Date date = cal.getTime();
 
@@ -103,6 +97,8 @@ public class UmmalquraCalendarTests {
 
 	@Test
 	public void testSetMonthField() {
+		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
+
 		cal.set(UmmalquraCalendar.MONTH, UmmalquraCalendar.RABI_AWWAL);
 		Date date = cal.getTime();
 
@@ -113,6 +109,8 @@ public class UmmalquraCalendarTests {
 
 	@Test
 	public void testSetDayField() {
+		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
+
 		cal.set(UmmalquraCalendar.DAY_OF_MONTH, 7);
 		Date date = cal.getTime();
 
@@ -122,6 +120,63 @@ public class UmmalquraCalendarTests {
 	}
 
 	@Test
+	public void testLengthOfMonth() {
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.MUHARRAM, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.SAFAR, 1).lengthOfMonth());
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.RABI_AWWAL, 1).lengthOfMonth());
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.RABI_THANI, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.JUMADA_AWWAL, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.JUMADA_THANI, 1).lengthOfMonth());
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.RAJAB, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.SHAABAN, 1).lengthOfMonth());
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.RAMADHAN, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.SHAWWAL, 1).lengthOfMonth());
+		assertEquals(29, new UmmalquraCalendar(1437, UmmalquraCalendar.THUL_QIDAH, 1).lengthOfMonth());
+		assertEquals(30, new UmmalquraCalendar(1437, UmmalquraCalendar.THUL_HIJJAH, 1).lengthOfMonth());
+	}
+
+	@Test
+	public void testLengthOfYear() {
+		assertEquals(355, new UmmalquraCalendar(1435, UmmalquraCalendar.MUHARRAM, 1).lengthOfYear());
+		assertEquals(354, new UmmalquraCalendar(1436, UmmalquraCalendar.MUHARRAM, 1).lengthOfYear());
+		assertEquals(354, new UmmalquraCalendar(1437, UmmalquraCalendar.MUHARRAM, 1).lengthOfYear());
+	}
+/*
+	@Test
+	public void testGetDisplayName(){
+		Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.RABI_THANI, 21);
+
+		System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH));
+		System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
+
+		System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, new Locale("ar")));
+		System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
+
+		System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ENGLISH));
+		System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH));
+
+		System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ar")));
+		System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("ar")));
+	}
+
+	@Test
+	public void testGetDisplayNames() {
+		Calendar cal = new UmmalquraCalendar();
+
+		System.out.println(cal.getDisplayNames(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH));
+		System.out.println(cal.getDisplayNames(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
+
+		System.out.println(cal.getDisplayNames(Calendar.MONTH, Calendar.SHORT, new Locale("ar")));
+		System.out.println(cal.getDisplayNames(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
+
+		System.out.println(cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ENGLISH));
+		System.out.println(cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH));
+
+		System.out.println(cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ar")));
+		System.out.println(cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("ar")));
+	}
+*/
+		@Test
 	public void testConstructor1() {
 		UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23);
 		Date date = cal.getTime();

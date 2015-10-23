@@ -1,5 +1,5 @@
 #ummalqura-calendar
-Implements the Umm Al-Qura calendar system in Java language.
+Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.
 
 **Useful links:**
 
@@ -12,7 +12,7 @@ Implements the Umm Al-Qura calendar system in Java language.
 <dependency>
 	<groupId>com.github.msarhan</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.6</version>
+	<version>1.1.7</version>
 </dependency>
 ```
 **Gradle**
@@ -21,7 +21,7 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.6'
+	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.7'
 }
 ```
 
@@ -30,23 +30,23 @@ dependencies {
 ```java
 // Suppose current gregorian data/time is: Fri Apr 03 18:12:38 AST 2015
 UmmalquraCalendar cal = new UmmalquraCalendar();
-System.out.println( cal.get(Calendar.YEAR) );         // 1436
-System.out.println( cal.get(Calendar.MONTH) );        // 5 <=> Jumada al-Akhirah
-System.out.println( cal.get(Calendar.DAY_OF_MONTH) ); // 14
+cal.get(Calendar.YEAR));         // 1436
+cal.get(Calendar.MONTH));        // 5 <=> Jumada al-Akhirah
+cal.get(Calendar.DAY_OF_MONTH)); // 14
 ```
 
 ###Using parametrized constructor(s)
 
 ```java
 Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11);
-System.out.println(cal.getTime()); // Fri May 29 00:00:00 AST 2015
+cal.getTime(); // Fri May 29 00:00:00 AST 2015
 ```
 ```java
 Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11, 18, 12, 38);
-System.out.println(cal.getTime()); // Fri May 29 18:12:38 AST 2015
+cal.getTime(); // Fri May 29 18:12:38 AST 2015
 ```
 
-###Using Calendar::set methods
+###Get + Set
 
 ```java
 Calendar cal = new UmmalquraCalendar();
@@ -54,7 +54,75 @@ cal.set(Calendar.YEAR, 1436);
 cal.set(Calendar.MONTH, UmmalquraCalendar.SHAABAN);
 cal.set(Calendar.DAY_OF_MONTH, 11);
 
-System.out.println(cal.getTime()); // Fri May 29 20:57:37 AST 2015
+cal.getTime(); // Fri May 29 20:57:37 AST 2015
+```
+
+```java
+Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11);
+cal.get(Calendar.YEAR);         // 1436
+cal.get(Calendar.MONTH);        // 7
+cal.get(Calendar.DAY_OF_MONTH); // 11
+```
+
+Get month length in days
+```java
+Calendar cal = new UmmalquraCalendar(1437, UmmalquraCalendar.MUHARRAM, 1);
+cal.lengthOfMonth();                                               // 30
+// Or using static version:
+UmmalquraCalendar.lengthOfMonth(1437, UmmalquraCalendar.MUHARRAM); // 30
+UmmalquraCalendar.lengthOfMonth(1437, UmmalquraCalendar.SAFAR);    // 29
+```
+
+Get year length in days
+```java
+Calendar cal = new UmmalquraCalendar(1437, UmmalquraCalendar.MUHARRAM, 1);
+cal.lengthOfYear();                   // 354
+// Or using static version:
+UmmalquraCalendar.lengthOfYear(1435); // 355	'Leap year'
+UmmalquraCalendar.lengthOfYear(1436); // 354
+UmmalquraCalendar.lengthOfYear(1437); // 354
+```
+
+Read month or week day name in a given style and `java.util.Locale`.
+```java
+Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.RABI_THANI, 21);
+
+cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);         // Rab-II
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);          // Rabi' al-Thani
+
+cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, new Locale("ar"));       // ربيع 2
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar"));        // ربيع الثاني
+
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ENGLISH);   // Tue
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);    // Tuesday
+
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ar")); // ث
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("ar"));  // الثلاثاء
+```
+Read month or week day names as a `java.util.Map` in a given style and `java.util.Locale`.
+Where entry key will be the field name and entry value will be the corresponding field value.
+```java
+Calendar cal = new UmmalquraCalendar();
+
+cal.getDisplayNames(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
+//{Thul-Q=10, Rab-I=2, Saf=1, Shw=9, Muh=0, Thul-H=11, Sha=7, Rab-II=3, Raj=6, Ram=8, Jum-I=4, Jum-II=5}
+cal.getDisplayNames(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
+//{Ramadhan=8, Rajab=6, Jumada al-Ula=4, Thul-Qi'dah=10, Sha'ban=7, Muharram=0, Safar=1, Thul-Hijjah=11, Shawwal=9, Rabi' al-Awwal=2, Jumada al-Akhirah=5, Rabi' al-Thani=3}
+
+cal.getDisplayNames(Calendar.MONTH, Calendar.SHORT, new Locale("ar"));
+//{جمادى 2=5, رمضان=8, جمادى 1=4, ربيع 2=3, ذو القعدة=10, صفر=1, محرم=0, رجب=6, ربيع 1=2, شوال=9, شعبان=7, ذو الحجة=11}
+cal.getDisplayNames(Calendar.MONTH, Calendar.LONG, new Locale("ar"));
+//{جمادى الآخرة=5, رمضان=8, ذو القعدة=10, صفر=1, محرم=0, رجب=6, ربيع الثاني=3, جمادى الأولى=4, شوال=9, شعبان=7, ربيع الأول=2, ذو الحجة=11}
+
+cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ENGLISH);
+//{Thu=5, Wed=4, Sun=1, Sat=7, Fri=6, Tue=3, Mon=2}
+cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);
+//{Saturday=7, Thursday=5, Monday=2, Tuesday=3, Wednesday=4, Friday=6, Sunday=1}
+
+cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ar"));
+//{خ=5, ج=6, ح=1, ث=3, س=7, ر=4, ن=2}
+cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("ar"));
+//{الاثنين=2, الخميس=5, الجمعة=6, الأربعاء=4, الثلاثاء=3, الأحد=1, السبت=7}
 ```
 
 ###Conversion
@@ -66,9 +134,11 @@ GregorianCalendar gCal = new GregorianCalendar(2012, Calendar.FEBRUARY, 12);
 Calendar uCal = new UmmalquraCalendar();
 uCal.setTime(gCal.getTime());
 
-System.out.println(uCal.get(Calendar.YEAR));         // 1433
-System.out.println(uCal.get(Calendar.MONTH));        // 2
-System.out.println(uCal.get(Calendar.DAY_OF_MONTH)); // 20
+uCal.get(Calendar.YEAR);         // 1433
+uCal.get(Calendar.MONTH);        // 2
+uCal.get(Calendar.DAY_OF_MONTH); // 20
+
+uCal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
 ```
 
 ####From Ummalqura to Gregorian
@@ -78,9 +148,9 @@ Calendar uCal = new UmmalquraCalendar(1433, UmmalquraCalendar.RABI_AWWAL, 15);
 GregorianCalendar gCal = new GregorianCalendar();
 gCal.setTime(uCal.getTime());
 
-System.out.println(gCal.get(Calendar.YEAR));         // 2012
-System.out.println(gCal.get(Calendar.MONTH));        // 1
-System.out.println(gCal.get(Calendar.DAY_OF_MONTH)); // 7
+gCal.get(Calendar.YEAR);         // 2012
+gCal.get(Calendar.MONTH);        // 1
+gCal.get(Calendar.DAY_OF_MONTH); // 7
 ```
 
 ###Formatting
@@ -95,43 +165,43 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("", Locale.ENGLISH);
 dateFormat.setCalendar(uCal);
 
 dateFormat.applyPattern("d");
-System.out.println(dateFormat.format(uCal.getTime())); // 8
+dateFormat.format(uCal.getTime()); // 8
 
 dateFormat.applyPattern("dd");
-System.out.println(dateFormat.format(uCal.getTime())); // 08
+dateFormat.format(uCal.getTime()); // 08
 
 dateFormat.applyPattern("E");
-System.out.println(dateFormat.format(uCal.getTime())); // Tue
+dateFormat.format(uCal.getTime()); // Tue
 
 dateFormat.applyPattern("EEEE");
-System.out.println(dateFormat.format(uCal.getTime())); // Tuesday
+dateFormat.format(uCal.getTime()); // Tuesday
 
 dateFormat.applyPattern("M");
-System.out.println(dateFormat.format(uCal.getTime())); // 3
+dateFormat.format(uCal.getTime()); // 3
 
 dateFormat.applyPattern("MM");
-System.out.println(dateFormat.format(uCal.getTime())); // 03
+dateFormat.format(uCal.getTime()); // 03
 
 dateFormat.applyPattern("MMM");
-System.out.println(dateFormat.format(uCal.getTime())); // Rab-I
+dateFormat.format(uCal.getTime()); // Rab-I
 
 dateFormat.applyPattern("MMMM");
-System.out.println(dateFormat.format(uCal.getTime())); // Rabi' al-Awwal
+dateFormat.format(uCal.getTime()); // Rabi' al-Awwal
 
 dateFormat.applyPattern("y");
-System.out.println(dateFormat.format(uCal.getTime())); // 1433
+dateFormat.format(uCal.getTime()); // 1433
 
 dateFormat.applyPattern("yy");
-System.out.println(dateFormat.format(uCal.getTime())); // 33
+dateFormat.format(uCal.getTime()); // 33
 
 dateFormat.applyPattern("EEEE d MMMM, y");
-System.out.println(dateFormat.format(uCal.getTime())); // Tuesday 8 Rabi' al-Awwal, 1433
+dateFormat.format(uCal.getTime()); // Tuesday 8 Rabi' al-Awwal, 1433
 
 dateFormat.applyPattern("y/MM/dd");
-System.out.println(dateFormat.format(uCal.getTime())); // 1433/03/08
+dateFormat.format(uCal.getTime()); // 1433/03/08
 
 dateFormat.applyPattern("y/MM/dd hh:mm a");
-System.out.println(dateFormat.format(uCal.getTime())); // 1433/03/08 08:45 PM
+dateFormat.format(uCal.getTime()); // 1433/03/08 08:45 PM
 ```
 
 ####Format using Arabic locale
@@ -142,19 +212,19 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("", new Locale("ar"));
 dateFormat.setCalendar(uCal);
 
 dateFormat.applyPattern("E");
-System.out.println(dateFormat.format(uCal.getTime())); // ث
+dateFormat.format(uCal.getTime()); // ث
 
 dateFormat.applyPattern("EEEE");
-System.out.println(dateFormat.format(uCal.getTime())); // الثلاثاء
+dateFormat.format(uCal.getTime()); // الثلاثاء
 
 dateFormat.applyPattern("MMM");
-System.out.println(dateFormat.format(uCal.getTime())); // ربيع 1
+dateFormat.format(uCal.getTime()); // ربيع 1
 
 dateFormat.applyPattern("MMMM");
-System.out.println(dateFormat.format(uCal.getTime())); // ربيع الأول
+dateFormat.format(uCal.getTime()); // ربيع الأول
 
 dateFormat.applyPattern("EEEE d MMMM, y");
-System.out.println(dateFormat.format(uCal.getTime())); // الثلاثاء 8 ربيع الأول, 1433
+dateFormat.format(uCal.getTime()); // الثلاثاء 8 ربيع الأول, 1433
 ```
 
 ###Parsing
@@ -178,28 +248,28 @@ Calendar cal = new UmmalquraCalendar(en);
 
 dateFormat.applyPattern("d/M/y");
 cal.setTime(dateFormat.parse("4/7/1435"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1435
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en));       // Rajab
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 4
+cal.get(Calendar.YEAR);                                      // 1435
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en);       // Rajab
+cal.get(Calendar.DAY_OF_MONTH);                              // 4
 
 dateFormat.applyPattern("MMMM d, y");
 cal.setTime(dateFormat.parse("Jumada al-Ula 10, 1436"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1436
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en));       // Jumada al-Ula
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 10
+cal.get(Calendar.YEAR);                                      // 1436
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en);       // Jumada al-Ula
+cal.get(Calendar.DAY_OF_MONTH);                              // 10
 
 dateFormat.applyPattern("EEEE, MMMM dd, y");
 cal.setTime(dateFormat.parse("Saturday, Sha'ban 07, 1434"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1434
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en));       // Sha'ban
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 7
+cal.get(Calendar.YEAR);                                      // 1434
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en);       // Sha'ban
+cal.get(Calendar.DAY_OF_MONTH);                              // 7
 
 dateFormat.applyPattern("EEEE, MMMM d, yy hh:mm:ss");
 cal.setTime(dateFormat.parse("Saturday, Jumada al-Ula 23, 36 12:19:44"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1436
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en));       // Jumada al-Ula
-System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, en)); // Saturday
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 23
+cal.get(Calendar.YEAR);                                      // 1436
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, en);       // Jumada al-Ula
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, en); // Saturday
+cal.get(Calendar.DAY_OF_MONTH);                              // 23
 ```
 
 ####Parse using Arabic locale
@@ -217,27 +287,27 @@ dateFormat.set2DigitYearStart(uCal.getTime());  // Used to properly format 'yy' 
 Calendar cal = new UmmalquraCalendar(ar);
 
 dateFormat.applyPattern("d/M/y");
-cal.setTime(dateFormat.parse("4/7/1435"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1435
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar));       // رجب
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 4
+cal.setTime(dateFormat.parse("4/7/1435");
+cal.get(Calendar.YEAR);                                      // 1435
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar);       // رجب
+cal.get(Calendar.DAY_OF_MONTH);                              // 4
 
 dateFormat.applyPattern("MMMM d, y");
 cal.setTime(dateFormat.parse("جمادى الأولى 10, 1436"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1436
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar));       // جمادى الأولى
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 10
+cal.get(Calendar.YEAR);                                      // 1436
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar);       // جمادى الأولى
+cal.get(Calendar.DAY_OF_MONTH);                              // 10
 
 dateFormat.applyPattern("EEEE, MMMM dd, y");
 cal.setTime(dateFormat.parse("السبت, شعبان 07, 1434"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1434
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar));       // شعبان
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 7
+cal.get(Calendar.YEAR);                                      // 1434
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar);       // شعبان
+cal.get(Calendar.DAY_OF_MONTH);                              // 7
 
 dateFormat.applyPattern("EEEE, MMMM d, yy hh:mm:ss");
 cal.setTime(dateFormat.parse("السبت, جمادى الأولى 23, 36 12:19:44"));
-System.out.println(cal.get(Calendar.YEAR));                                      // 1436
-System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar));       // جمادى الأولى
-System.out.println(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, ar)); // السبت
-System.out.println(cal.get(Calendar.DAY_OF_MONTH));                              // 23
+cal.get(Calendar.YEAR);                                      // 1436
+cal.getDisplayName(Calendar.MONTH, Calendar.LONG, ar);       // جمادى الأولى
+cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, ar); // السبت
+cal.get(Calendar.DAY_OF_MONTH);                              // 23
 ```

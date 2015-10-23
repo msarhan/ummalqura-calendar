@@ -6,7 +6,7 @@ tasks.withType(JavaCompile) {
 }
 
 group = 'com.github.msarhan'
-version = '1.1.6'
+version = '1.1.7'
 
 description = """com.github.msarhan:ummalqura-calendar"""
 
@@ -14,9 +14,8 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-
 repositories {
-        
+
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
