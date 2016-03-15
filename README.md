@@ -25,6 +25,16 @@ dependencies {
 }
 ```
 
+##ProGuard Configuration
+```java
+##---------------Begin: proguard configuration for UmmAlqura  ----------
+-dontwarn ummalqura.**
+-dontwarn com.github.msarhan.ummalqura.**
+-keep class com.github.msarhan.ummalqura.** { *; }
+
+##---------------End: proguard configuration for UmmAlqura  ---------
+```
+
 ##Usage
 
 ```java
