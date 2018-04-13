@@ -33,65 +33,65 @@ import java.util.ResourceBundle;
  */
 class UmmalquraDateFormatSymbols {
 
-	/**
-	 * The locale which is used for initializing this DateFormatSymbols object.
-	 *
-	 * @serial
-	 */
-	Locale locale = null;
+    /**
+     * The locale which is used for initializing this DateFormatSymbols object.
+     *
+     * @serial
+     */
+    Locale locale = null;
 
-	/**
-	 * Month strings. For example: "Muharram", "Safar", etc.  An array
-	 * of 12 strings, indexed by
-	 * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
-	 *
-	 * @serial
-	 */
-	String[] months = null;
+    /**
+     * Month strings. For example: "Muharram", "Safar", etc.  An array of 12 strings, indexed by
+     * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
+     *
+     * @serial
+     */
+    String[] months = null;
 
-	/**
-	 * Short month strings. For example: "Muh", "Saf", etc.  An array of
-	 * 12 strings, indexed by
-	 * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
-	 *
-	 * @serial
-	 */
-	String[] shortMonths = null;
+    /**
+     * Short month strings. For example: "Muh", "Saf", etc.  An array of 12 strings, indexed by
+     * <code>UmmalquraCalendar.MUHARRAM</code>, <code>UmmalquraCalendar.SAFAR</code>, etc.
+     *
+     * @serial
+     */
+    String[] shortMonths = null;
 
-	public UmmalquraDateFormatSymbols() {
-		initializeData(Locale.getDefault(Locale.Category.FORMAT));
-	}
+    public UmmalquraDateFormatSymbols() {
+        initializeData(Locale.getDefault(Locale.Category.FORMAT));
+    }
 
-	public UmmalquraDateFormatSymbols(Locale locale) {
-		initializeData(locale);
-	}
+    public UmmalquraDateFormatSymbols(Locale locale) {
+        initializeData(locale);
+    }
 
-	/**
-	 * Gets month strings. For example: "Muharram", "Safar", etc.
-	 *
-	 * @return the month strings.
-	 */
-	public String[] getMonths() {
-		return Arrays.copyOf(months, months.length);
-	}
+    /**
+     * Gets month strings. For example: "Muharram", "Safar", etc.
+     *
+     * @return the month strings.
+     */
+    public String[] getMonths() {
+        return Arrays.copyOf(months, months.length);
+    }
 
-	/**
-	 * Gets short month strings. For example: "Muh", "Saf", etc.
-	 *
-	 * @return the short month strings.
-	 */
-	public String[] getShortMonths() {
-		return Arrays.copyOf(shortMonths, shortMonths.length);
-	}
+    /**
+     * Gets short month strings. For example: "Muh", "Saf", etc.
+     *
+     * @return the short month strings.
+     */
+    public String[] getShortMonths() {
+        return Arrays.copyOf(shortMonths, shortMonths.length);
+    }
 
-	private void initializeData(Locale desiredLocale) {
-		locale = desiredLocale;
+    private void initializeData(Locale desiredLocale) {
+        locale = desiredLocale;
 
-		// Initialize the fields from the ResourceBundle for locale.
-		ResourceBundle resource = ResourceBundle.getBundle("com.github.msarhan.ummalqura.calendar.text.UmmalquraFormatData", locale);
+        // Initialize the fields from the ResourceBundle for locale.
+        ResourceBundle resource = ResourceBundle
+                .getBundle("com.github.msarhan.ummalqura.calendar.text.UmmalquraFormatData",
+                        locale);
 
-		months = resource.getStringArray("MonthNames");
-		shortMonths = resource.getStringArray("MonthAbbreviations");
-	}
+        months = resource.getStringArray("MonthNames");
+        shortMonths = resource.getStringArray("MonthAbbreviations");
+    }
 
 }

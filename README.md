@@ -1,18 +1,19 @@
-#ummalqura-calendar
-Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.
+# ummalqura-calendar
+Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.<br/>
+**The calculation is valid only for dates from 1356 AH (14 March 1937 CE) to 1500 AH (16 November 2077 CE).**
 
 **Useful links:**
 
 1. [http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm](http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm).
 2. [http://www.ummulqura.org.sa/](http://www.ummulqura.org.sa).
 
-##Installation
+## Installation
 **Maven**
 ```xml
 <dependency>
 	<groupId>com.github.msarhan</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.7</version>
+	<version>1.1.8</version>
 </dependency>
 ```
 **Gradle**
@@ -21,21 +22,11 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.7'
+	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.8'
 }
 ```
 
-##ProGuard Configuration
-```java
-##---------------Begin: proguard configuration for UmmAlqura  ----------
--dontwarn ummalqura.**
--dontwarn com.github.msarhan.ummalqura.**
--keep class com.github.msarhan.ummalqura.** { *; }
-
-##---------------End: proguard configuration for UmmAlqura  ---------
-```
-
-##Usage
+## Usage
 
 ```java
 // Suppose current gregorian data/time is: Fri Apr 03 18:12:38 AST 2015
@@ -45,7 +36,7 @@ cal.get(Calendar.MONTH));        // 5 <=> Jumada al-Akhirah
 cal.get(Calendar.DAY_OF_MONTH)); // 14
 ```
 
-###Using parametrized constructor(s)
+### Using parametrized constructor(s)
 
 ```java
 Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11);
@@ -56,7 +47,7 @@ Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11, 18, 12
 cal.getTime(); // Fri May 29 18:12:38 AST 2015
 ```
 
-###Get + Set
+### Get + Set
 
 ```java
 Calendar cal = new UmmalquraCalendar();
@@ -135,9 +126,9 @@ cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("ar"));
 //{الاثنين=2, الخميس=5, الجمعة=6, الأربعاء=4, الثلاثاء=3, الأحد=1, السبت=7}
 ```
 
-###Conversion
+### Conversion
 -------------
-####From Gregorian to Ummalqura
+#### From Gregorian to Ummalqura
 
 ```java
 GregorianCalendar gCal = new GregorianCalendar(2012, Calendar.FEBRUARY, 12);
@@ -151,7 +142,7 @@ uCal.get(Calendar.DAY_OF_MONTH); // 20
 uCal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
 ```
 
-####From Ummalqura to Gregorian
+#### From Ummalqura to Gregorian
 
 ```java
 Calendar uCal = new UmmalquraCalendar(1433, UmmalquraCalendar.RABI_AWWAL, 15);
@@ -163,11 +154,11 @@ gCal.get(Calendar.MONTH);        // 1
 gCal.get(Calendar.DAY_OF_MONTH); // 7
 ```
 
-###Formatting
+### Formatting
 -------------
 You can use `java.text.SimpleDateFormat` to format Ummalqura date.
 
-####Format using English locale
+#### Format using English locale
 
 ```java
 Calendar uCal = new UmmalquraCalendar(1433, UmmalquraCalendar.RABI_AWWAL, 8, 20, 45, 10);
@@ -214,7 +205,7 @@ dateFormat.applyPattern("y/MM/dd hh:mm a");
 dateFormat.format(uCal.getTime()); // 1433/03/08 08:45 PM
 ```
 
-####Format using Arabic locale
+#### Format using Arabic locale
 
 ```java
 Calendar uCal = new UmmalquraCalendar(1433, UmmalquraCalendar.RABI_AWWAL, 8, 20, 45, 10);
@@ -237,12 +228,12 @@ dateFormat.applyPattern("EEEE d MMMM, y");
 dateFormat.format(uCal.getTime()); // الثلاثاء 8 ربيع الأول, 1433
 ```
 
-###Parsing
+### Parsing
 ----------
 
 You can use `java.text.SimpleDateFormat` to parse Ummalqura date.
 
-####Parse using English locale
+#### Parse using English locale
 
 ```java
 Locale en = Locale.ENGLISH;
@@ -282,7 +273,7 @@ cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, en); // Saturday
 cal.get(Calendar.DAY_OF_MONTH);                              // 23
 ```
 
-####Parse using Arabic locale
+#### Parse using Arabic locale
 
 ```java
 Locale ar = new Locale("ar");
