@@ -13,7 +13,7 @@ Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.<br/>
 <dependency>
 	<groupId>com.github.msarhan</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.8</version>
+	<version>1.1.9</version>
 </dependency>
 ```
 **Gradle**
@@ -22,7 +22,7 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.8'
+	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.9'
 }
 ```
 
