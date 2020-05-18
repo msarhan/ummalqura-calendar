@@ -62,7 +62,7 @@ class UmmalquraGregorianConverter {
             22464, 22493, 22522, 22552, 22581, 22611, 22640, 22670, 22700, 22730, 22759, 22789, 22818, 22848, 22877, 22906, 22936, 22965, 22994, 23024,
             23054, 23083, 23113, 23143, 23173, 23202, 23232, 23261, 23290, 23320, 23349, 23379, 23408, 23438, 23467, 23497, 23527, 23556, 23586, 23616,
             23645, 23674, 23704, 23733, 23763, 23792, 23822, 23851, 23881, 23910, 23940, 23970,
-            //------------ start the Range of valid Hijri dates start from 1276-1342 -------------------//
+            //------------ end the Range of valid Hijri dates start from 1276-1342 -------------------//
 
 
             /*
@@ -367,7 +367,7 @@ class UmmalquraGregorianConverter {
 
     private static int ummalquraData(int index) {
         if (index < 0 || index >= ummalquraData.length) {
-            throw new IllegalArgumentException("Valid date should be between 1356 AH (14 March 1937 CE) to 1500 AH (16 November 2077 CE)");
+            throw new IllegalArgumentException("Valid date should be between 1276 AH (31 July 1859 CE) to 1500 AH (16 November 2077 CE)");
         }
 
         return ummalquraData[index];
