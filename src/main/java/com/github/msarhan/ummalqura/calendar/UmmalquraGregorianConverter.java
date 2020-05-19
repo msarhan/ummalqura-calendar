@@ -10,6 +10,7 @@ import java.util.Date;
  *
  * @author Mouaffak A. Sarhan.
  */
+
 class UmmalquraGregorianConverter {
 
     private static final int hijri_offset = 1275 * 12 ; // the old offset was 16260 = 12*1355
@@ -63,7 +64,6 @@ class UmmalquraGregorianConverter {
             23054, 23083, 23113, 23143, 23173, 23202, 23232, 23261, 23290, 23320, 23349, 23379, 23408, 23438, 23467, 23497, 23527, 23556, 23586, 23616,
             23645, 23674, 23704, 23733, 23763, 23792, 23822, 23851, 23881, 23910, 23940, 23970,
             //------------ end the Range of valid Hijri dates start from 1276-1342 -------------------//
-
 
             /*
             Years 1343-1355 AH were calculated by Mohammed Alshehri (dralshehri),
@@ -372,5 +372,4 @@ class UmmalquraGregorianConverter {
 
         return ummalquraData[index];
     }
-
 }
