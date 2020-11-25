@@ -39,7 +39,7 @@ import org.junit.Test;
 /**
  * @author msarhan.
  */
-public class UmmalquraDateFormatTests {
+public class UmmalquraDateFormatTest {
 
     private static Locale en = new Locale("en");
     private static Locale ar = new Locale("ar");

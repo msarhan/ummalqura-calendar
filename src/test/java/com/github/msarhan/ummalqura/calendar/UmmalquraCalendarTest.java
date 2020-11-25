@@ -38,7 +38,7 @@ import org.junit.Test;
 /**
  * @author msarhan.
  */
-public class UmmalquraCalendarTests {
+public class UmmalquraCalendarTest {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("y-M-d");
 

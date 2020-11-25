@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author msarhan.
  */
-public class UmmalquraGregorianConverterTests {
+public class UmmalquraGregorianConverterTest {
 
     @Test
     public void gregorianToHijri1() {

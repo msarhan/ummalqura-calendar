@@ -16,15 +16,6 @@ Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.<br/>
 	<version>1.1.9</version>
 </dependency>
 ```
-**Gradle**
-```gradle
-repositories {
-	mavenCentral()
-}
-dependencies {
-	compile group: 'com.github.msarhan', name: 'ummalqura-calendar', version:'1.1.9'
-}
-```
 
 ## Usage
 

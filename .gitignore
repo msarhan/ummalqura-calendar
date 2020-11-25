@@ -1,8 +1,10 @@
-*.iml
-target/
-build/
-.idea/
-.gradle/
+target
+build
+.idea
+.vscode
+.gradle
 .project
-.settings/
+.settings
 .classpath
+.DS_Store
+*.iml
