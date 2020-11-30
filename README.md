@@ -1,33 +1,36 @@
+[![Build Status](https://travis-ci.com/msarhan/ummalqura-calendar.svg?branch=master)](https://travis-ci.com/msarhan/ummalqura-calendar)
+[![Javadoc](https://www.javadoc.io/badge/com.github.msarhan/ummalqura-calendar.svg)](https://www.javadoc.io/doc/com.github.msarhan/ummalqura-calendar)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/msarhan/ummalqura-calendar/blob/master/LICENSE)
+[![Hits-of-Code](https://hitsofcode.com/github/msarhan/ummalqura-calendar?branch=master)](https://hitsofcode.com/view/github/msarhan/ummalqura-calendar?branch=master)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.msarhan/ummalqura-calendar.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.msarhan/ummalqura-calendar)
+
 # ummalqura-calendar
-Implementation of `java.util.Calendar` for the Umm Al-Qura calendar system.<br/>
-**The calculation is valid only for dates from 1356 AH (14 March 1937 CE) to 1500 AH (16 November 2077 CE).**
-
-##Useful links:
-
-1. [http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm](http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm).
-2. [http://www.ummulqura.org.sa/](http://www.ummulqura.org.sa).
+> Implementation of [`java.util.Calendar`](https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html) for the Umm Al-Qura calendar system.
+Calculation used in `v2.0.0` was derived from [Java 8](https://docs.oracle.com/javase/8/docs/api/java/time/chrono/HijrahChronology.html).
+This calculation is valid from **1300H** to **1600H**.
 
 ## Table of contents
-- [Installation](#installation)
-- [Usage](#usage)
-  * [Using parametrized constructor(s)](#using-parametrized-constructor-s-)
-  * [Get + Set](#get---set)
-  * [Conversion](#conversion)
-    + [From Gregorian to Ummalqura](#from-gregorian-to-ummalqura)
-    + [From Ummalqura to Gregorian](#from-ummalqura-to-gregorian)
-  * [Formatting](#formatting)
-    + [Format using English locale](#format-using-english-locale)
-    + [Format using Arabic locale](#format-using-arabic-locale)
-  * [Parsing](#parsing)
-    + [Parse using English locale](#parse-using-english-locale)
-    + [Parse using Arabic locale](#parse-using-arabic-locale)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Using parametrized constructors](#using-parametrized-constructors)
+    - [Get + Set](#get--set)
+    - [Conversion](#conversion)
+      - [From Gregorian to Ummalqura](#from-gregorian-to-ummalqura)
+      - [From Ummalqura to Gregorian](#from-ummalqura-to-gregorian)
+    - [Formatting](#formatting)
+      - [Format using English locale](#format-using-english-locale)
+      - [Format using Arabic locale](#format-using-arabic-locale)
+    - [Parsing](#parsing)
+      - [Parse using English locale](#parse-using-english-locale)
+      - [Parse using Arabic locale](#parse-using-arabic-locale)
+  - [Localization: Add support for additional locales](#localization-add-support-for-additional-locales)
 
 ## Installation
 ```xml
 <dependency>
 	<groupId>com.github.msarhan</groupId>
 	<artifactId>ummalqura-calendar</artifactId>
-	<version>1.1.9</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -41,7 +44,7 @@ cal.get(Calendar.MONTH));        // 5 <=> Jumada al-Akhirah
 cal.get(Calendar.DAY_OF_MONTH)); // 14
 ```
 
-### Using parametrized constructor(s)
+### Using parametrized constructors
 
 ```java
 Calendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.SHAABAN, 11);
@@ -234,7 +237,7 @@ dateFormat.format(uCal.getTime()); // الثلاثاء 8 ربيع الأول, 14
 
 ### Parsing
 
-You can use `java.text.SimpleDateFormat` to parse Ummalqura date.
+You can use [`java.text.SimpleDateFormat`](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html) to parse Ummalqura date.
 
 #### Parse using English locale
 
@@ -316,7 +319,7 @@ cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, ar); // السبت
 cal.get(Calendar.DAY_OF_MONTH);                              // 23
 ```
 
-### Localization: Add support for additional locales
+## Localization: Add support for additional locales
 Currently, `ummalqura-calendar` supports the following locales: Arabic, English and French.
 You can add another locale by creating properties file with the following aspects:
 - It should be named `UmmalquraFormatData_[LOCALE].properties`, where `[LOCALE]` should be a language tag. e.g. `tr`, `zh_CN`
@@ -325,4 +328,4 @@ You can add another locale by creating properties file with the following aspect
 As an example, French locale has been added as a [properties file](src/main/resources/com/github/msarhan/ummalqura/calendar/text/UmmalquraFormatData_fr.properties).
 
 Please note that if properties file contains special characters that cannot be
-represented in **ISO-8859-1** encoding; it must be represented by unicode escapes in the form `\uXXXX`.
+represented in **ISO-8859-1** encoding; it must be encoded by unicode escapes in the form `\uXXXX`.

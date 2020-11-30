@@ -8,3 +8,4 @@ build
 .classpath
 .DS_Store
 *.iml
+hs_err_pid*

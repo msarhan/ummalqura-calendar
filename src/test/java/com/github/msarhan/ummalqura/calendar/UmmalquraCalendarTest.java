@@ -24,16 +24,16 @@
 
 package com.github.msarhan.ummalqura.calendar;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author msarhan.
@@ -204,23 +204,24 @@ public class UmmalquraCalendarTest {
                 new UmmalquraCalendar(1437, UmmalquraCalendar.MUHARRAM, 1).lengthOfYear());
     }
 
+    /*
     @Test(expected = IllegalArgumentException.class)
     public void shouldRejectYearBefore1356() {
         new UmmalquraCalendar(1350, UmmalquraCalendar.SHAABAN, 11);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldRejectYearAfter1500() {
-        new UmmalquraCalendar(1501, UmmalquraCalendar.SHAABAN, 11);
-    }
+        @Test(expected = IllegalArgumentException.class)
+        public void shouldRejectYearAfter1500() {
+            new UmmalquraCalendar(1501, UmmalquraCalendar.SHAABAN,1);
+        }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldRejectInvalidGregorianValue() {
-        GregorianCalendar gCal = new GregorianCalendar(1930, Calendar.FEBRUARY, 12);
-        Calendar uCal = new UmmalquraCalendar();
-        uCal.setTime(gCal.getTime());
-    }
-
+        @Test(expected = IllegalArgumentException.class)
+        public void shouldRejectInvalidGregorianValue() {
+            GregorianCalendar gCal = new GregorianCalendar(1930, Calendar.FEBRUARY, 12);
+            Calendar uCal = new UmmalquraCalendar();
+            uCal.setTime(gCal.getTime());
+        }
+    */
     @Test
     public void testConstructor1() {
         UmmalquraCalendar cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23);

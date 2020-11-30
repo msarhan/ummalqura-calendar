@@ -24,12 +24,7 @@
 
 package com.github.msarhan.ummalqura.calendar;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * @author Mouaffak A. Sarhan.
@@ -115,7 +110,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
      *
      * @serial
      */
-    protected int hFields[];
+    protected int[] hFields;
 
     /**
      * Constructs a default <code>UmmalquraCalendar</code> using the current time in the default
@@ -139,7 +134,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * Constructs a <code>UmmalquraCalendar</code> based on the current time in the given time zone
      * with the given locale.
      *
-     * @param zone the given time zone.
+     * @param zone    the given time zone.
      * @param aLocale the given locale.
      */
     public UmmalquraCalendar(TimeZone zone, Locale aLocale) {
@@ -150,11 +145,11 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * Constructs a <code>UmmalquraCalendar</code> with the given date set in the default time zone
      * with the default locale.
      *
-     * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
-     * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
-     * Month value is 0-based. e.g., 0 for Muharram.
+     * @param year       the value used to set the <code>YEAR</code> calendar field in the calendar.
+     * @param month      the value used to set the <code>MONTH</code> calendar field in the calendar.
+     *                   Month value is 0-based. e.g., 0 for Muharram.
      * @param dayOfMonth the value used to set the <code>DAY_OF_MONTH</code> calendar field in the
-     * calendar.
+     *                   calendar.
      */
     public UmmalquraCalendar(int year, int month, int dayOfMonth) {
         this(year, month, dayOfMonth, 0, 0, 0);
@@ -164,17 +159,17 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * Constructs a <code>UmmalquraCalendar</code> with the given date and time set for the default
      * time zone with the default locale.
      *
-     * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
-     * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
-     * Month value is 0-based. e.g., 0 for Muharram.
+     * @param year       the value used to set the <code>YEAR</code> calendar field in the calendar.
+     * @param month      the value used to set the <code>MONTH</code> calendar field in the calendar.
+     *                   Month value is 0-based. e.g., 0 for Muharram.
      * @param dayOfMonth the value used to set the <code>DAY_OF_MONTH</code> calendar field in the
-     * calendar.
-     * @param hourOfDay the value used to set the <code>HOUR_OF_DAY</code> calendar field in the
-     * calendar.
-     * @param minute the value used to set the <code>MINUTE</code> calendar field in the calendar.
+     *                   calendar.
+     * @param hourOfDay  the value used to set the <code>HOUR_OF_DAY</code> calendar field in the
+     *                   calendar.
+     * @param minute     the value used to set the <code>MINUTE</code> calendar field in the calendar.
      */
     public UmmalquraCalendar(int year, int month, int dayOfMonth, int hourOfDay,
-            int minute) {
+                             int minute) {
         this(year, month, dayOfMonth, hourOfDay, minute, 0);
     }
 
@@ -182,18 +177,18 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * Constructs a <code>UmmalquraCalendar</code> with the given date and time set for the default
      * time zone with the default locale.
      *
-     * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
-     * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
-     * Month value is 0-based. e.g., 0 for Muharram.
+     * @param year       the value used to set the <code>YEAR</code> calendar field in the calendar.
+     * @param month      the value used to set the <code>MONTH</code> calendar field in the calendar.
+     *                   Month value is 0-based. e.g., 0 for Muharram.
      * @param dayOfMonth the value used to set the <code>DAY_OF_MONTH</code> calendar field in the
-     * calendar.
-     * @param hourOfDay the value used to set the <code>HOUR_OF_DAY</code> calendar field in the
-     * calendar.
-     * @param minute the value used to set the <code>MINUTE</code> calendar field in the calendar.
-     * @param second the value used to set the <code>SECOND</code> calendar field in the calendar.
+     *                   calendar.
+     * @param hourOfDay  the value used to set the <code>HOUR_OF_DAY</code> calendar field in the
+     *                   calendar.
+     * @param minute     the value used to set the <code>MINUTE</code> calendar field in the calendar.
+     * @param second     the value used to set the <code>SECOND</code> calendar field in the calendar.
      */
     public UmmalquraCalendar(int year, int month, int dayOfMonth, int hourOfDay,
-            int minute, int second) {
+                             int minute, int second) {
 
         set(YEAR, year);
         set(MONTH, month);
@@ -207,12 +202,12 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * Returns the length of a Hijri month in a Hijri year. <p> This returns the length of the month
      * in days.
      *
-     * @param year Hijri year
+     * @param year  Hijri year
      * @param month Hijri month
      * @return the length of the month in days
      */
     public static int lengthOfMonth(int year, int month) {
-        return UmmalquraGregorianConverter.getDaysInMonth(year, month);
+        return HijrahChronology.getDaysInMonth(year, month + 1);
     }
 
     /**
@@ -243,7 +238,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
     @Override
     public void set(int field, int value) {
         if (field == YEAR || field == MONTH || field == DAY_OF_MONTH) {
-            int[] hDateInfo = UmmalquraGregorianConverter.toHijri(getTime());
+            int[] hDateInfo = HijrahChronology.toHijri(getTime());
             if (field == YEAR) {
                 hDateInfo[0] = value;
             } else if (field == MONTH) {
@@ -252,7 +247,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
                 hDateInfo[2] = value;
             }
 
-            int[] gDateInfo = UmmalquraGregorianConverter.toGregorian(hDateInfo[0], hDateInfo[1],
+            int[] gDateInfo = HijrahChronology.toGregorian(hDateInfo[0], hDateInfo[1],
                     hDateInfo[2]);
 
             super.set(YEAR, gDateInfo[0]);
@@ -298,16 +293,16 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * return <code>null</code>. <p>The default implementation supports the calendar fields for
      * which a {@link UmmalquraDateFormatSymbols} has names in the given <code>locale</code>.
      *
-     * @param field the calendar field for which the string representation is returned
-     * @param style the style applied to the string representation; one of {@link #SHORT} or {@link
-     * #LONG}.
+     * @param field  the calendar field for which the string representation is returned
+     * @param style  the style applied to the string representation; one of {@link #SHORT} or {@link
+     *               #LONG}.
      * @param locale the locale for the string representation
      * @return the string representation of the given <code>field</code> in the given
      * <code>style</code>, or <code>null</code> if no string representation is applicable.
      * @throws IllegalArgumentException if <code>field</code> or <code>style</code> is invalid, or
-     * if this <code>Calendar</code> is non-lenient and any of the calendar fields have invalid
-     * values
-     * @throws NullPointerException if <code>locale</code> is null
+     *                                  if this <code>Calendar</code> is non-lenient and any of the calendar fields have invalid
+     *                                  values
+     * @throws NullPointerException     if <code>locale</code> is null
      * @since 1.6
      */
     @Override
@@ -344,17 +339,17 @@ public class UmmalquraCalendar extends GregorianCalendar {
      * all strings returned by {@link UmmalquraDateFormatSymbols#getShortMonths()} and {@link
      * UmmalquraDateFormatSymbols#getMonths()}.
      *
-     * @param field the calendar field for which the display names are returned
-     * @param style the style applied to the display names; one of {@link #SHORT}, {@link #LONG}, or
-     * {@link #ALL_STYLES}.
+     * @param field  the calendar field for which the display names are returned
+     * @param style  the style applied to the display names; one of {@link #SHORT}, {@link #LONG}, or
+     *               {@link #ALL_STYLES}.
      * @param locale the locale for the display names
      * @return a <code>Map</code> containing all display names in <code>style</code> and
      * <code>locale</code> and their field values, or <code>null</code> if no display names are
      * defined for <code>field</code>
      * @throws IllegalArgumentException if <code>field</code> or <code>style</code> is invalid, or
-     * if this <code>Calendar</code> is non-lenient and any of the calendar fields have invalid
-     * values
-     * @throws NullPointerException if <code>locale</code> is null
+     *                                  if this <code>Calendar</code> is non-lenient and any of the calendar fields have invalid
+     *                                  values
+     * @throws NullPointerException     if <code>locale</code> is null
      */
     public Map<String, Integer> getDisplayNames(int field, int style, Locale locale) {
 
@@ -383,7 +378,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
         UmmalquraDateFormatSymbols symbols = new UmmalquraDateFormatSymbols(locale);
         String[] strings = getFieldStrings(field, style, symbols);
         if (strings != null) {
-            Map<String, Integer> names = new HashMap<String, Integer>();
+            Map<String, Integer> names = new HashMap<>();
             for (int i = 0; i < strings.length; i++) {
                 if (strings[i].length() == 0) {
                     continue;
@@ -426,7 +421,7 @@ public class UmmalquraCalendar extends GregorianCalendar {
             hFields = new int[super.fields.length];
         }
 
-        int[] hDateInfo = UmmalquraGregorianConverter.toHijri(time);
+        int[] hDateInfo = HijrahChronology.toHijri(new Date(time));
         hFields[Calendar.YEAR] = hDateInfo[0];
         hFields[Calendar.MONTH] = hDateInfo[1];
         hFields[Calendar.DAY_OF_MONTH] = hDateInfo[2];

@@ -8,8 +8,11 @@ import java.util.Date;
  * AH (14 March 1937 CE) to 1500 AH (16 November 2077 CE). Outside this interval, the converter will
  * give erroneous results. http://www.staff.science.uu.nl/~gent0113/islam/ummalqura.htm
  *
+ * @deprecated use {@link HijrahChronology}
+ *
  * @author Mouaffak A. Sarhan.
  */
+@Deprecated
 class UmmalquraGregorianConverter {
 
     private static int[] ummalquraData = {28607, 28636, 28665, 28695, 28724, 28754, 28783, 28813,
