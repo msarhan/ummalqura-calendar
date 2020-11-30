@@ -39,9 +39,9 @@ This calculation is valid from **1300H** to **1600H**.
 ```java
 // Suppose current gregorian data/time is: Fri Apr 03 18:12:38 AST 2015
 UmmalquraCalendar cal = new UmmalquraCalendar();
-cal.get(Calendar.YEAR));         // 1436
-cal.get(Calendar.MONTH));        // 5 <=> Jumada al-Akhirah
-cal.get(Calendar.DAY_OF_MONTH)); // 14
+cal.get(Calendar.YEAR);         // 1436
+cal.get(Calendar.MONTH);        // 5 <=> Jumada al-Akhirah
+cal.get(Calendar.DAY_OF_MONTH); // 14
 ```
 
 ### Using parametrized constructors
