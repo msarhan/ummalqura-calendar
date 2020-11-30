@@ -40,7 +40,7 @@ import org.junit.Test;
  */
 public class UmmalquraCalendarTest {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("y-M-d");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("y-M-d");
 
     @Test
     public void testDisplayName() {
@@ -48,12 +48,12 @@ public class UmmalquraCalendarTest {
                 19, 44);
 
         String displayName = cal
-                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, new Locale("en"));
+                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, Locale.ENGLISH);
         assertEquals("Month long display name for Jumada al-Ula 23, 1436 should be 'Jumada al-Ula'",
                 "Jumada al-Ula", displayName);
 
         displayName = cal
-                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.SHORT, new Locale("en"));
+                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.SHORT, Locale.ENGLISH);
         assertEquals("Month short display name for Jumada al-Ula 23, 1436 should be 'Jum-I'",
                 "Jum-I", displayName);
 
@@ -67,6 +67,15 @@ public class UmmalquraCalendarTest {
         assertEquals("Month short display name for Jumada al-Ula 23, 1436 should be 'جمادى 1'",
                 "جمادى 1", displayName);
 
+        displayName = cal
+                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, Locale.FRENCH);
+        assertEquals("Month long display name for Jumada al-Ula 23, 1436 should be 'Djoumada-l-Oula'",
+                "Djoumada-l-Oula", displayName);
+
+        displayName = new UmmalquraCalendar(1442, UmmalquraCalendar.RABI_AWWAL, 1)
+                .getDisplayName(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, Locale.FRENCH);
+        assertEquals("Month long display name for RABI_AWWAL, should be 'Rabiʻ-oul-Aououal'",
+                "Rabiʻ-oul-Aououal", displayName);
     }
 
     @Test
@@ -75,7 +84,7 @@ public class UmmalquraCalendarTest {
                 19, 44);
 
         Map<String, Integer> displayNames = cal
-                .getDisplayNames(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, new Locale("en"));
+                .getDisplayNames(UmmalquraCalendar.MONTH, UmmalquraCalendar.LONG, Locale.ENGLISH);
         assertEquals("Month long display names count should be 12", 12, displayNames.size());
         assertTrue("Month long display names should contains 'Muharram'",
                 displayNames.containsKey("Muharram"));
@@ -83,7 +92,7 @@ public class UmmalquraCalendarTest {
                 displayNames.containsKey("Thul-Qi'dah"));
 
         displayNames = cal.getDisplayNames(UmmalquraCalendar.MONTH, UmmalquraCalendar.SHORT,
-                new Locale("en"));
+                Locale.ENGLISH);
         assertEquals("Month short display names count should be 12", 12, displayNames.size());
         assertTrue("Month short display names should contains 'Saf'",
                 displayNames.containsKey("Saf"));

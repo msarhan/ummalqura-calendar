@@ -24,9 +24,7 @@
 
 package com.github.msarhan.ummalqura.calendar;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author Mouaffak A. Sarhan.
@@ -83,19 +81,26 @@ class UmmalquraDateFormatSymbols {
     }
 
     private void initializeData(Locale desiredLocale) {
-        if (!("ar".equalsIgnoreCase(desiredLocale.getLanguage()) || "en"
-                .equalsIgnoreCase(desiredLocale.getLanguage()))) {
-            throw new IllegalArgumentException("Supported locales are 'English' and 'Arabic'");
-        }
         locale = desiredLocale;
 
         // Initialize the fields from the ResourceBundle for locale.
         ResourceBundle resource = ResourceBundle
                 .getBundle("com.github.msarhan.ummalqura.calendar.text.UmmalquraFormatData",
-                        locale);
+                        locale,
+                        new ResourceBundle.Control() {
+                            @Override
+                            public Locale getFallbackLocale(String baseName, Locale locale) {
+                                return Locale.ENGLISH;
+                            }
+                        });
 
-        months = resource.getStringArray("MonthNames");
-        shortMonths = resource.getStringArray("MonthAbbreviations");
+        if(ListResourceBundle.class.isAssignableFrom(resource.getClass())) {
+            months = resource.getStringArray("MonthNames");
+            shortMonths = resource.getStringArray("MonthAbbreviations");
+        } else if(PropertyResourceBundle.class.isAssignableFrom(resource.getClass())){
+            months = resource.getString("MonthNames").split(",");
+            shortMonths = resource.getString("MonthAbbreviations").split(",");
+        }
     }
 
 }
