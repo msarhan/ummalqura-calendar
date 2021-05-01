@@ -228,9 +228,9 @@ class HijrahChronology implements Serializable {
         int day1 = epochMonthToEpochDay(epochMonth);
         int date = epochDay - day1; // epochDay - dayOfEpoch(year, month);
 
-        int dateInfo[] = new int[3];
+        int[] dateInfo = new int[3];
         dateInfo[0] = year;
-        dateInfo[1] = month; // change to 1-based.
+        dateInfo[1] = month; // ms: keep 0-based.
         dateInfo[2] = date + 1; // change to 1-based.
         return dateInfo;
     }

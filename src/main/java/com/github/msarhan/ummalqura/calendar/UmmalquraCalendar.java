@@ -235,17 +235,26 @@ public class UmmalquraCalendar extends GregorianCalendar {
         return super.get(field);
     }
 
+    private boolean isSetYear = false;
+    private boolean isSetMonth = false;
+    private boolean isSetDayOfMonth = false;
+
     @Override
     public void set(int field, int value) {
         if (field == YEAR || field == MONTH || field == DAY_OF_MONTH) {
             int[] hDateInfo = HijrahChronology.toHijri(getTime());
             if (field == YEAR) {
                 hDateInfo[0] = value;
+                isSetYear = true;
             } else if (field == MONTH) {
                 hDateInfo[1] = value;
+                isSetMonth = true;
             } else {
                 hDateInfo[2] = value;
+                isSetDayOfMonth = true;
             }
+
+            adjustFields(hDateInfo);
 
             int[] gDateInfo = HijrahChronology.toGregorian(hDateInfo[0], hDateInfo[1],
                     hDateInfo[2]);
@@ -253,12 +262,24 @@ public class UmmalquraCalendar extends GregorianCalendar {
             super.set(YEAR, gDateInfo[0]);
             super.set(MONTH, gDateInfo[1]);
             super.set(DAY_OF_MONTH, gDateInfo[2]);
-            complete();
 
+            complete();
         } else {
             super.set(field, value);
         }
+    }
 
+    private void adjustFields(int[] hDateInfo) {
+        if(hDateInfo[2] == 30){
+            if(HijrahChronology.INSTANCE.getMonthLength(hDateInfo[0], hDateInfo[1]+1) < 30) {
+                if(!isSetMonth){
+                    hDateInfo[1] = 0;
+                }
+                if(!isSetYear){
+                    hDateInfo[0] = 1300;
+                }
+            }
+        }
     }
 
     /**

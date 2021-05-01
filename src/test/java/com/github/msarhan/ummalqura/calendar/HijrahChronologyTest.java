@@ -38,56 +38,70 @@ import static org.junit.Assert.assertTrue;
 public class HijrahChronologyTest {
 
     @Test
-    public void gregorianToHijri1() {
+    public void g2h1() {
         Calendar cal = new GregorianCalendar(2015, Calendar.MARCH, 14);
         int[] hDateInfo = HijrahChronology.toHijri(cal.getTime());
         System.out.println(Arrays.toString(hDateInfo));
-        assertTrue("2015-03-14 G should be 1436-05-23 H",
-                hDateInfo[0] == 1436 && hDateInfo[1] == 4 && hDateInfo[2] == 23);
+        assertTrue("2015-03-14 G should convert to: 1436-05-23 H",
+                hDateInfo[0] == 1436 && hDateInfo[1] == UmmalquraCalendar.JUMADA_AWWAL && hDateInfo[2] == 23);
     }
 
     @Test
-    public void gregorianToHijri2() {
+    public void g2h2() {
         Calendar cal = new GregorianCalendar(1999, Calendar.APRIL, 1);
         int[] hDateInfo = HijrahChronology.toHijri(cal.getTime());
 
-        assertTrue("1999-04-01 G should be 1419-12-14 H",
-                hDateInfo[0] == 1419 && hDateInfo[1] == 11 && hDateInfo[2] == 14);
+        assertTrue("1999-04-01 G should convert to: 1419-12-14 H",
+                hDateInfo[0] == 1419 && hDateInfo[1] == UmmalquraCalendar.THUL_HIJJAH && hDateInfo[2] == 14);
     }
 
     @Test
-    public void gregorianToHijri3() {
+    public void g2h3() {
         Calendar cal = new GregorianCalendar(1989, Calendar.FEBRUARY, 25);
         int[] hDateInfo = HijrahChronology.toHijri(cal.getTime());
 
-        assertTrue("1989-02-25 G should be 1409-07-19 H",
-                hDateInfo[0] == 1409 && hDateInfo[1] == 6 && hDateInfo[2] == 18);
+        assertTrue("1989-02-25 G should convert to: 1409-07-19 H",
+                hDateInfo[0] == 1409 && hDateInfo[1] == UmmalquraCalendar.RAJAB && hDateInfo[2] == 18);
     }
 
     @Test
-    public void gregorianToHijri4() {
+    public void g2h4() {
         Calendar cal = new GregorianCalendar(2020, Calendar.NOVEMBER, 30);
         int[] hDateInfo = HijrahChronology.toHijri(cal.getTime());
 
-        assertTrue("2020-11-30 G should be 1442-04-15 H",
-                hDateInfo[0] == 1442 && hDateInfo[1] == 3 && hDateInfo[2] == 15);
+        assertTrue("2020-11-30 G should convert to: 1442-04-15 H",
+                hDateInfo[0] == 1442 && hDateInfo[1] == UmmalquraCalendar.RABI_THANI && hDateInfo[2] == 15);
     }
 
     @Test
-    public void hijriToGregorian1() {
-        int[] hDateInfo = HijrahChronology.toGregorian(1436, 4, 23);
-
-        assertTrue("1436-05-23 H should be 2015-03-14 G",
-                hDateInfo[0] == 2015 && hDateInfo[1] == 2 && hDateInfo[2] == 14);
+    public void g2h5() {
+        Calendar cal = new GregorianCalendar(2020, Calendar.OCTOBER, 17);
+        int[] hDateInfo = HijrahChronology.toHijri(cal.getTime());
+        assertTrue("2020-10-17 G should convert to: 1442-02-30 H",
+                hDateInfo[0] == 1442 && hDateInfo[1] == UmmalquraCalendar.SAFAR && hDateInfo[2] == 30);
     }
 
     @Test
-    public void hijriToGregorian2() {
-        int[] hDateInfo = HijrahChronology.toGregorian(1419, 11, 15);
-        System.out.println("hijriToGregorian2 " + Arrays.toString(hDateInfo));
+    public void h2g1() {
+        int[] hDateInfo = HijrahChronology.toGregorian(1436, UmmalquraCalendar.JUMADA_AWWAL, 23);
 
-        assertTrue("1419-12-15 H should be 1999-04-02 G",
-                hDateInfo[0] == 1999 && hDateInfo[1] == 3 && hDateInfo[2] == 2);
+        assertTrue("1436-05-23 H should convert to: 2015-03-14 G",
+                hDateInfo[0] == 2015 && hDateInfo[1] == Calendar.MARCH && hDateInfo[2] == 14);
     }
 
+    @Test
+    public void h2g2() {
+        int[] hDateInfo = HijrahChronology.toGregorian(1419, UmmalquraCalendar.THUL_HIJJAH, 15);
+
+        assertTrue("1419-12-15 H should convert to: 1999-04-02 G",
+                hDateInfo[0] == 1999 && hDateInfo[1] == Calendar.APRIL && hDateInfo[2] == 2);
+    }
+
+    @Test
+    public void h2g3() {
+        int[] dateInfo = HijrahChronology.toGregorian(1442, UmmalquraCalendar.SAFAR, 30);
+
+        assertTrue("1442-02-30 H should convert to: 2020-10-17 G",
+                dateInfo[0] == 2020 && dateInfo[1] == Calendar.OCTOBER && dateInfo[2] == 17);
+    }
 }

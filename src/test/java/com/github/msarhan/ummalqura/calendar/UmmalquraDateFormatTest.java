@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.junit.Before;
+
 import org.junit.Test;
 
 /**
@@ -41,103 +41,105 @@ import org.junit.Test;
  */
 public class UmmalquraDateFormatTest {
 
-    private static Locale en = new Locale("en");
-    private static Locale ar = new Locale("ar");
-    private static UmmalquraCalendar cal = null;
-
-    @Before
-    public void setup() {
-        cal = new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
-    }
+    private static final Locale en = new Locale("en");
+    private static final Locale ar = new Locale("ar");
 
     @Test
-    public void testStandAloneCountFormat() throws Exception {
+    public void testStandAloneCountFormat() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        UmmalquraCalendar cal =
+                new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
 
-        assertEquals("5", formatDate(en, "M"));
-        assertEquals("05", formatDate(en, "MM"));
-        assertEquals("Jum-I", formatDate(en, "MMM"));
-        assertEquals("Jumada al-Ula", formatDate(en, "MMMM"));
-        assertEquals("جمادى 1", formatDate(ar, "MMM"));
-        assertEquals("جمادى الأولى", formatDate(ar, "MMMM"));
+        assertEquals("5", formatDate(cal, en, "M"));
+        assertEquals("05", formatDate(cal, en, "MM"));
+        assertEquals("Jum-I", formatDate(cal, en, "MMM"));
+        assertEquals("Jumada al-Ula", formatDate(cal, en, "MMMM"));
+        assertEquals("جمادى 1", formatDate(cal, ar, "MMM"));
+        assertEquals("جمادى الأولى", formatDate(cal, ar, "MMMM"));
 
-        assertEquals("1436", formatDate(en, "y"));
-        assertEquals("36", formatDate(en, "yy"));
-        assertEquals("1436", formatDate(en, "yyyy"));
+        assertEquals("1436", formatDate(cal, en, "y"));
+        assertEquals("36", formatDate(cal, en, "yy"));
+        assertEquals("1436", formatDate(cal, en, "yyyy"));
 
-        assertEquals("23", formatDate(en, "d"));
-        assertEquals("23", formatDate(en, "dd"));
+        assertEquals("23", formatDate(cal, en, "d"));
+        assertEquals("23", formatDate(cal, en, "dd"));
 
-        assertEquals("Sat", formatDate(en, "E"));
-        assertEquals("Saturday", formatDate(en, "EEEE"));
-        assertEquals("س", formatDate(ar, "E"));
-        assertEquals("السبت", formatDate(ar, "EEEE"));
+        assertEquals("Sat", formatDate(cal, en, "E"));
+        assertEquals("Saturday", formatDate(cal, en, "EEEE"));
+        assertEquals("س", formatDate(cal, ar, "E"));
+        assertEquals("السبت", formatDate(cal, ar, "EEEE"));
     }
 
     @Test
     public void formatWithEnglishLocale() {
+        UmmalquraCalendar cal =
+                new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
 
-        assertEquals("{1436,5,23} should format to '1436-05-23' using 'y-M-d'", "1436-5-23",
-                formatDate(en, "y-M-d"));
+        assertEquals(
+                "{1436,5,23} should format to '1436-05-23' using 'y-M-d'",
+                "1436-5-23",
+                formatDate(cal, en, "y-M-d")
+        );
 
         assertEquals("{1436,5,23} should format to 'Jum-I 23, 1436' using 'MMM d, y'",
                 "Jum-I 23, 1436",
-                formatDate(en, "MMM d, y"));
+                formatDate(cal, en, "MMM d, y"));
 
         assertEquals("{1436,5,23} should format to 'Jumada al-Ula 23, 1436' using 'MMMM d, y'",
                 "Jumada al-Ula 23, 1436",
-                formatDate(en, "MMMM d, y"));
+                formatDate(cal, en, "MMMM d, y"));
 
         assertEquals(
                 "{1436,5,23} should format to 'Sat, Jumada al-Ula 23, 1436' using 'E, MMMM d, y'",
                 "Sat, Jumada al-Ula 23, 1436",
-                formatDate(en, "E, MMMM d, y"));
+                formatDate(cal, en, "E, MMMM d, y"));
 
         assertEquals(
                 "{1436,5,23} should format to 'Saturday, Jumada al-Ula 23, 1436' using 'EEEE, MMMM d, y'",
                 "Saturday, Jumada al-Ula 23, 1436",
-                formatDate(en, "EEEE, MMMM d, y"));
+                formatDate(cal, en, "EEEE, MMMM d, y"));
 
         assertEquals(
                 "{1436,5,23} should format to 'Saturday, Jumada al-Ula 23, 36' using 'EEEE, MMMM d, yy'",
                 "Saturday, Jumada al-Ula 23, 36",
-                formatDate(en, "EEEE, MMMM d, yy"));
+                formatDate(cal, en, "EEEE, MMMM d, yy"));
 
         assertEquals(
                 "Should format to 'Saturday, Jumada al-Ula 23, 36 12:19:44' using 'EEEE, MMMM d, yy hh:mm:ss'",
                 "Saturday, Jumada al-Ula 23, 36 12:19:44",
-                formatDate(en, "EEEE, MMMM d, yy hh:mm:ss"));
-
+                formatDate(cal, en, "EEEE, MMMM d, yy hh:mm:ss"));
     }
 
     @Test
     public void formatWithArabicLocale() {
+        UmmalquraCalendar cal =
+                new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
 
-        assertEquals("{1436,5,23} should format to '1436-05-23' using 'y-M-d'", "1436-5-23",
-                formatDate(ar, "y-M-d"));
+        assertEquals("{1436,5,23} should format to '1436-05-23' using 'y-M-d'",
+                "1436-5-23",
+                formatDate(cal, ar, "y-M-d"));
 
         assertEquals("{1436,5,23} should format to 'جمادى 1 23, 1436' using 'MMM d, y'",
                 "جمادى 1 23, 1436",
-                formatDate(ar, "MMM d, y"));
+                formatDate(cal, ar, "MMM d, y"));
 
         assertEquals("{1436,5,23} should format to 'جمادى الأولى 23, 1436' using 'MMMM d, y'",
                 "جمادى الأولى 23, 1436",
-                formatDate(ar, "MMMM d, y"));
+                formatDate(cal, ar, "MMMM d, y"));
 
         assertEquals("{1436,5,23} should format to 'س, جمادى الأولى 23, 1436' using 'E, MMMM d, y'",
                 "س, جمادى الأولى 23, 1436",
-                formatDate(ar, "E, MMMM d, y"));
+                formatDate(cal, ar, "E, MMMM d, y"));
 
         assertEquals(
                 "{1436,5,23} should format to 'السبت, جمادى الأولى 23, 1436' using 'EEEE, MMMM d, y'",
                 "السبت, جمادى الأولى 23, 1436",
-                formatDate(ar, "EEEE, MMMM d, y"));
+                formatDate(cal, ar, "EEEE, MMMM d, y"));
 
         assertEquals(
                 "{1436,5,23} should format to 'السبت, جمادى الأولى 23, 36' using 'EEEE, MMMM d, yy'",
                 "السبت, جمادى الأولى 23, 36",
-                formatDate(ar, "EEEE, MMMM d, yy"));
-
+                formatDate(cal, ar, "EEEE, MMMM d, yy"));
     }
 
     @Test
@@ -179,22 +181,23 @@ public class UmmalquraDateFormatTest {
     }
 
     @Test
-    public void parseWithEnglishLocale() throws ParseException {
+    public void parseWithEnglishLocale() throws Exception {
+        Calendar uCal;
 
-        Calendar uCal = parseDate("1436-5-23", "y-M-d", en);
-        assertEquals("'1436-5-23' should parse using 'y-M-d' format",
+        uCal = parseDate("1436-5-23", "y-M-d", en);
+        assertEquals("'1436-5-23' should parse using 'y-M-d'",
                 "1436-5-23",
                 String.format("%d-%d-%d", uCal.get(Calendar.YEAR), uCal.get(Calendar.MONTH) + 1,
                         uCal.get(Calendar.DAY_OF_MONTH)));
 
         uCal = parseDate("Jum-I 7, 1436", "MMM d, y", en);
-        assertEquals("'Jum-I 7, 1436' should parse using 'MMM d, y' format",
+        assertEquals("'Jum-I 7, 1436' should parse using 'MMM d, y'",
                 "1436-5-7",
                 String.format("%d-%d-%d", uCal.get(Calendar.YEAR), uCal.get(Calendar.MONTH) + 1,
                         uCal.get(Calendar.DAY_OF_MONTH)));
 
         uCal = parseDate("Jumada al-Ula 10, 1436", "MMMM d, y", en);
-        assertEquals("'Jumada al-Ula 10, 1436' should parse using 'MMMM d, y' format",
+        assertEquals("'Jumada al-Ula 10, 1436' should parse using 'MMMM d, y'",
                 "1436-5-10",
                 String.format("%d-%d-%d", uCal.get(Calendar.YEAR), uCal.get(Calendar.MONTH) + 1,
                         uCal.get(Calendar.DAY_OF_MONTH)));
@@ -237,7 +240,7 @@ public class UmmalquraDateFormatTest {
     public void parseWithArabicLocale() throws ParseException {
 
         Calendar uCal = parseDate("1436-5-23", "y-M-d", ar);
-        assertEquals("'1436-5-23' should parse using 'y-M-d' format",
+        assertEquals("'1436-5-23' should parse using 'y-M-d'",
                 "1436-5-23",
                 String.format("%d-%d-%d", uCal.get(Calendar.YEAR), uCal.get(Calendar.MONTH) + 1,
                         uCal.get(Calendar.DAY_OF_MONTH)));
@@ -276,10 +279,6 @@ public class UmmalquraDateFormatTest {
 
     //-----------------------------------------------------------------------------------
 
-    private String formatDate(Locale l, String fmt) {
-        return formatDate(cal, l, fmt);
-    }
-
     private String formatDate(Calendar cal, Locale l, String fmt) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(fmt, l);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -294,7 +293,7 @@ public class UmmalquraDateFormatTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat(fmt, l);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         dateFormat.setCalendar(uCal);
-        uCal.set(Calendar.YEAR, 1420);
+        uCal.set(Calendar.YEAR, 1400);
         dateFormat.set2DigitYearStart(uCal.getTime());
 
         uCal.setTime(dateFormat.parse(dateText));

@@ -288,8 +288,9 @@ UmmalquraCalendar uCal = new UmmalquraCalendar(ar);
 SimpleDateFormat dateFormat = new SimpleDateFormat("", ar);
 dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 dateFormat.setCalendar(uCal);
-uCal.set(Calendar.YEAR, 1420);                  // Used to properly format 'yy' pattern
-dateFormat.set2DigitYearStart(uCal.getTime());  // Used to properly format 'yy' pattern
+// Used to properly format 'yy' pattern for dates in 14th century
+uCal.set(Calendar.YEAR, 1400);
+dateFormat.set2DigitYearStart(uCal.getTime());
 
 Calendar cal = new UmmalquraCalendar(ar);
 
