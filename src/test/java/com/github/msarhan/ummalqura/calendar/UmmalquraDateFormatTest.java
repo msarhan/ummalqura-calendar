@@ -111,6 +111,16 @@ public class UmmalquraDateFormatTest {
     }
 
     @Test
+    public void issue_20(){
+        UmmalquraCalendar cal =
+                new UmmalquraCalendar(1441, UmmalquraCalendar.RAMADHAN, 5);
+        assertEquals(
+                "Should format to '05 Ramadhan, 1441' using 'd MMMM, y'",
+                "05 Ramadhan, 1441",
+                formatDate(cal, en, "dd MMMM, y"));
+    }
+
+    @Test
     public void formatWithArabicLocale() {
         UmmalquraCalendar cal =
                 new UmmalquraCalendar(1436, UmmalquraCalendar.JUMADA_AWWAL, 23, 12, 19, 44);
