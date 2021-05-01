@@ -115,7 +115,7 @@ public class UmmalquraDateFormatTest {
         UmmalquraCalendar cal =
                 new UmmalquraCalendar(1441, UmmalquraCalendar.RAMADHAN, 5);
         assertEquals(
-                "Should format to '05 Ramadhan, 1441' using 'd MMMM, y'",
+                "Should format to '05 Ramadhan, 1441' using 'dd MMMM, y'",
                 "05 Ramadhan, 1441",
                 formatDate(cal, en, "dd MMMM, y"));
     }

@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.com/msarhan/ummalqura-calendar.svg?branch=master)](https://travis-ci.com/msarhan/ummalqura-calendar)
 [![Javadoc](https://www.javadoc.io/badge/com.github.msarhan/ummalqura-calendar.svg)](https://www.javadoc.io/doc/com.github.msarhan/ummalqura-calendar)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/msarhan/ummalqura-calendar/blob/master/LICENSE)
-[![Hits-of-Code](https://hitsofcode.com/github/msarhan/ummalqura-calendar?branch=master)](https://hitsofcode.com/view/github/msarhan/ummalqura-calendar?branch=master)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.msarhan/ummalqura-calendar.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.msarhan/ummalqura-calendar)
+[![Supported JVM Versions](https://img.shields.io/badge/JVM-7-brightgreen.svg?style=flat&logo=Java)](https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html)
 
 # ummalqura-calendar
 > Implementation of [`java.util.Calendar`](https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html) for the Umm Al-Qura calendar system.
-Calculation used in `v2.0.0` was derived from [Java 8](https://docs.oracle.com/javase/8/docs/api/java/time/chrono/HijrahChronology.html).
+Calculation used in `version 2.x` was derived from [Java 8](https://docs.oracle.com/javase/8/docs/api/java/time/chrono/HijrahChronology.html).
 This calculation is valid from **1300H** to **1600H**.
 
 ## Table of contents
@@ -28,9 +28,9 @@ This calculation is valid from **1300H** to **1600H**.
 ## Installation
 ```xml
 <dependency>
-	<groupId>com.github.msarhan</groupId>
-	<artifactId>ummalqura-calendar</artifactId>
-	<version>2.0.1</version>
+  <groupId>com.github.msarhan</groupId>
+  <artifactId>ummalqura-calendar</artifactId>
+  <version>[VERSION]</version>
 </dependency>
 ```
 
